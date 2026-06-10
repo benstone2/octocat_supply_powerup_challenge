@@ -12,7 +12,7 @@ Most of us already use Copilot to write code. Today we go further — **we teach
 
 ---
 
-## 🥊 Challenge 1 — *"Teach Copilot Something New"*
+## ⚙️ Challenge 1 — *"Teach Copilot Something New"*
 
 ### Build a Custom Skill
 
@@ -22,7 +22,7 @@ Most of us already use Copilot to write code. Today we go further — **we teach
 
 **Starter kit:**
 
-- Sample GitHub Repo to try out skills on: **[Octocat Supply Management demo repo](https://github.com/pm-self-learning/octocat_supply_powerup_challenge)**
+- Sample GitHub Repo to try out skills on: **[Octocat Supply Management demo repo](https://github.com/pm-self-learning/octocat_supply_powerup_challenge)** or use your own repo.
 - Browse the **[awesome-copilot skills directory](https://awesome-copilot.github.com/skills/)** for inspiration and structure (it's the canonical community library).
 - Skim a couple of real skills to see the `SKILL.md` pattern, frontmatter, and how assets are bundled.
 - Try `copilot plugin install <skill-name> @awesome-copilot` to see one in action before you build yours.
@@ -84,15 +84,41 @@ Most of us already use Copilot to write code. Today we go further — **we teach
 Read more **[here](https://github.github.com/gh-aw/setup/quick-start/#prerequisites)**
   
 
-
-
 **Done looks like:** A green workflow run on your repo, with the agent visibly doing the thing — opening an issue, posting a comment, or filing a PR.
 
 ---
 
+## ⚙️ Challenge 3 - *"Give Copilot a Specialist"*
+
+### Build a Custom Agent
+
+**Mission:** Create a **Custom Agent** — a reusable, purpose-built agent definition (an `*.agent.md` file) that bundles a focused persona, a curated set of tools, and tailored instructions so Copilot behaves like a domain specialist for a specific job (e.g., an API reviewer, a database migration helper, a test-writing agent, or a security auditor).
+
+**Why it matters:** Custom agents let you encode "who should handle this kind of work and how" directly into your repo. Instead of re-explaining context every time, you spin up a specialist that already knows its scope, its tools, and its guardrails — and your whole team can reuse it.
+
+**What is a custom agent?**
+
+- A custom agent is defined in a Markdown file with YAML frontmatter (`name`, `description`, `tools`, and optionally a model) followed by the agent's system prompt / instructions.
+- The frontmatter declares which tools the agent can use and how it should behave; the body describes its mission, boundaries, and quality bar.
+- They live alongside your code (e.g., in `.github/agents/`) so they're versioned, reviewable, and shareable like any other source file.
+
+**Starter kit:**
+
+- Browse the **[awesome-copilot custom agents directory](https://awesome-copilot.github.com/agents/)** for inspiration and ready-made examples.
+- Read the docs to get started:
+  - **[Use custom agents in VS Code](https://code.visualstudio.com/docs/copilot/customization/custom-agents)**
+  - **[Customize Copilot — overview](https://code.visualstudio.com/docs/copilot/customization/overview)**
+  - **[GitHub Docs — Customize Copilot](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)**
+- Pick one real, narrow task (review API changes, scaffold a CRUD endpoint, audit a PR for security) and build an agent that nails it.
+
+**Done looks like:** A working `*.agent.md` in your repo that you can select and invoke, and it visibly behaves like the specialist you designed — staying in scope and using only the tools you gave it.
+
+---
+
+
 # 🌟 Stretch Challenge
 
-Got time to spare or want to push further? These are the boss levels. Pick one (or both) once you've shipped one of the core challenges above.
+Got time to spare or want to push further? Pick one (or both) once you've done one of the core challenges above.
 
 ---
 
@@ -106,6 +132,7 @@ Got time to spare or want to push further? These are the boss levels. Pick one (
 
 **Why it matters:** This is the door to embedding Copilot's reasoning into your own product surfaces. Internal tools, customer-facing assistants, ops dashboards — anywhere a developer-grade AI would be useful.
 
+
 **Starter kit:**
 
 - Repo: **[github/copilot-sdk](https://github.com/github/copilot-sdk)** — multi-language SDK source + docs.
@@ -113,6 +140,8 @@ Got time to spare or want to push further? These are the boss levels. Pick one (
 - Pick a recipe in your language and get it running end-to-end before you customise.
 
 **Done looks like:** A runnable demo on localhost showing your app having a real conversation with a Copilot agent.
+
+
 
 ---
 
