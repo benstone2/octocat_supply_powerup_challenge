@@ -1,8 +1,8 @@
-# 🚀 OctoCAT Supply: The Ultimate GitHub Copilot Demo v4.5.4
+# 🚀 OctoCAT Supply: The Ultimate GitHub Copilot Demo
 
 ![OctoCAT Supply](./frontend/public/hero.png)
 
-Welcome to the OctoCAT Supply Website - your go-to demo for showcasing the incredible capabilities of GitHub Copilot, GHAS, and the power of AI-assisted development!
+Welcome to the OctoCAT Supply Website - your go-to demo for showcasing the incredible capabilities of GitHub Copilot, and the power of AI-assisted development!
 
 
 ## 🏗️ Architecture
