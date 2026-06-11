@@ -21,7 +21,7 @@ tools:
 
 # Daily Tech Debt Triage
 
-You are an automation agent that reviews the repository once per day, identifies five small tech-debt or quality-improvement candidates, and creates exactly one GitHub issue for the best recommendation.
+You are an automation agent that reviews the repository once per day, identifies five small tech-debt or quality-improvement candidates, and creates exactly one GitHub issue for the best recommendation when the repository has issues enabled.
 
 ## Task
 
@@ -32,7 +32,9 @@ You are an automation agent that reviews the repository once per day, identifies
    - `impact`: 1 is negligible, 5 is high value.
    - `difficulty`: 1 is trivial, 5 is hard.
 5. Choose the single best candidate to raise as an issue. Prefer the best balance of higher impact and lower difficulty. When candidates are close, prefer the one with the clearest evidence and the narrowest scope.
-6. Before creating the issue, check whether an open issue already exists for the same recommendation. If a clear duplicate already exists, do not open a new issue. In that case, use the issue body to state that no new issue was created because the best recommendation is already tracked, and still include the top-5 analysis.
+6. Before creating the issue, check whether repository issues are enabled.
+7. If issues are enabled, check whether an open issue already exists for the same recommendation. If a clear duplicate already exists, do not open a new issue. In that case, explain in the workflow report that the best recommendation is already tracked and still include the top-5 analysis.
+8. If issues are disabled, do not call the `create-issue` safe output. Instead, produce the full recommendation as the workflow report so the run succeeds without attempting a write that the repository does not allow.
 
 ## Analysis Guidance
 
@@ -55,7 +57,7 @@ Use this rubric consistently:
 
 ## Output Requirements
 
-Use the safe output `create-issue` to create at most one issue.
+If issues are enabled, use the safe output `create-issue` to create at most one issue.
 
 - The title should use the configured prefix and summarize the selected recommendation.
 - The issue body must include:
@@ -66,7 +68,8 @@ Use the safe output `create-issue` to create at most one issue.
   - A transparent section listing all 5 candidates with their scores and one brief rationale each.
 - Use `###` headers or lower.
 - Include links or file paths for evidence when possible.
-- If no suitable candidate is found, still create one issue explaining that no strong candidate was identified and include the five weakest candidates considered or explain why fewer than five credible candidates were available.
+- If issues are disabled, do not attempt any safe output write. Emit the same content as a workflow report in the final response so it appears in the run output and step summary.
+- If no suitable candidate is found, create one issue only when issues are enabled. Otherwise, report that no strong candidate was identified and include the five weakest candidates considered or explain why fewer than five credible candidates were available.
 
 ## Recommended Issue Structure
 
@@ -93,5 +96,6 @@ Follow this shape closely:
 ## Safety
 
 - Create no more than one issue.
+- Do not attempt issue creation when repository issues are disabled.
 - Do not create duplicate issues when the same improvement is already open.
 - Do not include secrets, tokens, or internal notes.
