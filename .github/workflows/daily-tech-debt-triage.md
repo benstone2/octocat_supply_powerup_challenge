@@ -3,6 +3,7 @@ name: Daily Tech Debt Triage
 description: Analyze the repository for small improvements, rank five candidates, and open one issue for the best option.
 on:
   schedule: daily
+  workflow_dispatch:
 permissions:
   contents: read
   issues: write
