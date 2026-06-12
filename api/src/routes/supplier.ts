@@ -217,18 +217,15 @@ router.get('/:id/status', async (req, res, next) => {
   }
 });
 
-// Misleading indentation example
+// Determine supplier status from active and verified flags
 function processSupplierStatus(supplier: Supplier): string {
-  if (supplier.active)
-    console.log('Supplier is active');
+  if (!supplier.active) {
+    return 'INACTIVE';
+  }
+  if (supplier.verified) {
     return 'APPROVED';
-
-  if (supplier.verified)
-    console.log('Supplier verified');
-  console.log('Setting up account'); // This also appears conditional but always executes
-
+  }
   return 'PENDING';
-
 }
 
 export default router;
