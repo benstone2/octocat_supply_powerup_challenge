@@ -34,7 +34,8 @@ You are an automation agent that reviews the repository once per day, identifies
 5. Choose the single best candidate to raise as an issue. Prefer the best balance of higher impact and lower difficulty. When candidates are close, prefer the one with the clearest evidence and the narrowest scope.
 6. Before creating the issue, check whether repository issues are enabled.
 7. If issues are enabled, check whether an open issue already exists for the same recommendation. If a clear duplicate already exists, do not open a new issue. In that case, explain in the workflow report that the best recommendation is already tracked and still include the top-5 analysis.
-8. If issues are disabled, do not call the `create-issue` safe output. Instead, produce the full recommendation as the workflow report so the run succeeds without attempting a write that the repository does not allow.
+8. Always produce a structured workflow report in the final response so the run summary surfaces the chosen recommendation and all 5 candidates, regardless of whether an issue is created.
+9. If issues are disabled, do not call the `create-issue` safe output. Instead, rely on the workflow report so the run succeeds without attempting a write that the repository does not allow.
 
 ## Analysis Guidance
 
@@ -59,6 +60,12 @@ Use this rubric consistently:
 
 If issues are enabled, use the safe output `create-issue` to create at most one issue.
 
+- Always emit a workflow report in the final response. The report should be readable on its own in the run summary.
+- The workflow report must include:
+  - A `### Recommended Issue` section with the chosen candidate, impact, difficulty, and why it was selected.
+  - A `### Other Candidates` section listing the remaining candidates with impact, difficulty, and why each was not selected.
+  - A `### Run Notes` section stating whether issues are enabled and whether an existing issue or duplicate prevented creation.
+
 - The title should use the configured prefix and summarize the selected recommendation.
 - The issue body must include:
   - A short summary of the chosen recommendation.
@@ -74,6 +81,21 @@ If issues are enabled, use the safe output `create-issue` to create at most one 
 ## Recommended Issue Structure
 
 Follow this shape closely:
+
+### Recommended Issue
+- Candidate name.
+- Why it was selected.
+- Impact: X/5.
+- Difficulty: X/5.
+
+### Other Candidates
+- Candidate name — Impact X/5, Difficulty X/5, why not selected.
+- Repeat until all 5 candidates are covered.
+
+### Run Notes
+- Issues enabled: yes/no.
+- New issue created: yes/no.
+- Duplicate issue detected: yes/no.
 
 ### Recommendation
 - What to improve.
